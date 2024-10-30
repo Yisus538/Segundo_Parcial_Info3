@@ -10,7 +10,7 @@ public class Segundo_Parcial {
             System.out.println("---- MENU ----");
             System.out.println("1. Recursividad");
             System.out.println("2. Ordenamiento");
-            System.out.println("3. PilaCola");
+            System.out.println("3. Pila & Cola");
             System.out.println("4. Práctico 4");
             System.out.println("5. Práctico 5");
             System.out.println("6. Práctico 6");
@@ -24,7 +24,7 @@ public class Segundo_Parcial {
             switch (opcion) {
                 case 1 -> PracticoRecursividad.mostrarMenu();
                 case 2 -> PracticoOrdenamiento.mostrarMenu();
-                case 3 -> PracticoPilaCola.mostrarMenu();
+                case 3 -> PracticoColaPila.mostrarMenu();
                 case 0 -> System.out.println("Saliendo...");
                 default -> System.out.println("Error, Ingrese otra opcion...");
             }
