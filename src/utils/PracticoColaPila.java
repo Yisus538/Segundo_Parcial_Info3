@@ -22,7 +22,6 @@ public class PracticoColaPila {
         }
         return true;
     }
-
     // Verificar si una expresión matemática tiene paréntesis equilibrados
     public static boolean expresionEquilibrada(String expresion) {
         PilaArreglo<Character> pila = new PilaArreglo<>(); // Crear instancia de Pila
@@ -38,7 +37,6 @@ public class PracticoColaPila {
         }
         return pila.isEmpty();
     }
-
     // Ordenar una cola en orden ascendente
     public static void ordenarColaAscendente(ColaArreglo<Integer> cola) {
         ColaArreglo<Integer> colaAuxiliar = new ColaArreglo<>();
@@ -75,7 +73,6 @@ public class PracticoColaPila {
         }
         System.out.println();
     }
-
     // Método para mostrar el menú y ejecutar las opciones del práctico 3
     public static void mostrarMenu() {
         Scanner scanner = new Scanner(System.in);
