@@ -1,11 +1,12 @@
 package utils.estructuras.arbolBinario;
 
 import java.util.Random;
+import utils.estructuras.ColaLista;
 
-public class ArbolBinario {
+public class ArbolBinario implements IArbol {
     private Nodo raiz;
 
-    // Insertar un valor en el árbol
+    @Override
     public void insertar(int valor) {
         raiz = insertarRecursivo(raiz, valor);
     }
@@ -17,23 +18,22 @@ public class ArbolBinario {
 
         if (valor < actual.valor) {
             actual.izquierdo = insertarRecursivo(actual.izquierdo, valor);
-        } else if (valor > actual.valor) { // Para evitar duplicados
+        } else if (valor > actual.valor) { // Evita duplicados
             actual.derecho = insertarRecursivo(actual.derecho, valor);
         }
 
         return actual;
     }
 
-    // Generar el árbol con 10 valores aleatorios entre 0 y 25
     public void generarArbol() {
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            int valor = random.nextInt(26); // Valores entre 0 y 25
+            int valor = random.nextInt(26);
             insertar(valor);
         }
     }
 
-    // Recorrido Inorden
+    @Override
     public void inorder() {
         inorderRecursivo(raiz);
         System.out.println();
@@ -47,21 +47,19 @@ public class ArbolBinario {
         }
     }
 
-    // Calcular la profundidad del árbol
+    @Override
     public int profundidad() {
         return calcularProfundidad(raiz);
     }
 
     private int calcularProfundidad(Nodo nodo) {
-        if (nodo == null) {
-            return 0;
-        }
+        if (nodo == null) return 0;
         int profundidadIzquierda = calcularProfundidad(nodo.izquierdo);
         int profundidadDerecha = calcularProfundidad(nodo.derecho);
         return Math.max(profundidadIzquierda, profundidadDerecha) + 1;
     }
 
-    // Método para eliminar un nodo con un valor dado
+    @Override
     public void eliminar(int valor) {
         raiz = eliminarRecursivo(raiz, valor);
     }
@@ -77,11 +75,9 @@ public class ArbolBinario {
         } else if (valor > nodo.valor) {
             nodo.derecho = eliminarRecursivo(nodo.derecho, valor);
         } else {
-            // Nodo con un solo hijo o sin hijos
             if (nodo.izquierdo == null) return nodo.derecho;
             if (nodo.derecho == null) return nodo.izquierdo;
 
-            // Nodo con dos hijos: obtener el valor mínimo en el subárbol derecho
             nodo.valor = encontrarMin(nodo.derecho);
             nodo.derecho = eliminarRecursivo(nodo.derecho, nodo.valor);
         }
@@ -96,5 +92,33 @@ public class ArbolBinario {
         }
         return minValor;
     }
+    public void imprimirArbol() {
+        if (raiz == null) {
+            System.out.println("El árbol está vacío.");
+            return;
+        }
+
+        ColaLista<Nodo> cola = new ColaLista<>();
+        cola.enqueue(raiz);
+        int nivel = 0;
+
+        while (!cola.isEmpty()) {
+            int tamañoNivel = cola.size();
+            System.out.print("Nivel " + nivel + ": ");
+
+            for (int i = 0; i < tamañoNivel; i++) {
+                Nodo actual = cola.dequeue();
+                if (actual != null) {
+                    System.out.print(actual.valor + " ");
+                    cola.enqueue(actual.izquierdo);
+                    cola.enqueue(actual.derecho);
+                }
+            }
+            System.out.println();
+            nivel++;
+        }
+    }
+
 }
+
 
