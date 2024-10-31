@@ -5,7 +5,7 @@ public class Segundo_Parcial {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        int opcion = 0;
+        int opcion;
 
         do {
             System.out.println("---- MENU ----");
@@ -14,10 +14,9 @@ public class Segundo_Parcial {
             System.out.println("3. Pila & Cola con Arreglo");
             System.out.println("4. Pila & Cola con Lista");
             System.out.println("5. Arbol Binario");
-            System.out.println("6. Práctico 6");
-            System.out.println("7. Práctico 7");
-            System.out.println("8. Práctico 8");
-            System.out.println("9. Práctico 9");
+            System.out.println("6. Práctico 7");
+            System.out.println("7. Práctico 8");
+            System.out.println("8. Práctico 9");
             System.out.println("0. Salir");
             System.out.print("Opción: ");
             opcion = in.nextInt();
