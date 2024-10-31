@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 public class ColaLista<T> implements Cola<T> {
     private Nodo<T> frente;
     private Nodo<T> fin;
+    private int tam;
 
     // Clase interna Nodo
     private static class Nodo<T> {
@@ -27,6 +28,7 @@ public class ColaLista<T> implements Cola<T> {
             fin.siguiente = nuevoNodo;
             fin = nuevoNodo;
         }
+        tam++;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class ColaLista<T> implements Cola<T> {
         if (frente == null) {
             fin = null;
         }
+        tam--;
         return dato;
     }
 
@@ -53,6 +56,10 @@ public class ColaLista<T> implements Cola<T> {
     @Override
     public boolean isEmpty() {
         return frente == null;
+    }
+    // Método para obtener el tamaño de la cola
+    public int size() {
+        return tam;
     }
 }
 
