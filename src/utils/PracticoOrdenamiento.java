@@ -91,61 +91,63 @@ public class PracticoOrdenamiento {
         return System.nanoTime() - startTime;
     }
 
-    // Menú para el Práctico 2 - Ordenamiento
+
     public static void mostrarMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
+        Scanner in = new Scanner(System.in);
+        int opc;
 
         do {
-            System.out.println("\nSeleccione el tipo de ordenamiento:");
-            System.out.println("1. Ordenamiento por Inserción");
+
+            System.out.println("\nPractico 2 - Ordenamiento:");
+            System.out.println("1. Ordenamiento por Insercion");
             System.out.println("2. Ordenamiento Shellsort");
             System.out.println("3. Ordenamiento Quicksort");
             System.out.println("4. Mostrar tiempo de ordenamiento");
-            System.out.println("0. Volver al menú principal");
-            opcion = scanner.nextInt();
+            System.out.println("0. Volver al menu");
+            opc = in.nextInt();
 
-            switch (opcion) {
+            switch (opc) {
                 case 1, 2, 3 -> {
-                    System.out.print("Ingrese la longitud del arreglo: ");
-                    int length = scanner.nextInt();
-                    Integer[] array = generarArrayAleatorio(length);
+                    System.out.print("Ingrese el tamaño del arreglo: ");
+                    int len = in.nextInt();
+
+                    Integer[] arr = generarArrayAleatorio(len);
 
                     System.out.println("Arreglo original:");
-                    mostrarArray(array);
+                    mostrarArray(arr);
 
-                    switch (opcion) {
+                    switch (opc) {
                         case 1 -> {
-                            insertionSort(array);
-                            System.out.println("Arreglo ordenado por Inserción:");
+                            insertionSort(arr);
+                            System.out.println("Arreglo ordenado por Insercion:");
                         }
                         case 2 -> {
-                            shellSort(array);
+                            shellSort(arr);
                             System.out.println("Arreglo ordenado por Shellsort:");
                         }
                         case 3 -> {
-                            quickSort(array, 0, array.length - 1);
+                            quickSort(arr, 0, arr.length - 1);
                             System.out.println("Arreglo ordenado por Quicksort:");
                         }
                     }
-                    mostrarArray(array);
+                    mostrarArray(arr);
                 }
                 case 4 -> {
-                    System.out.print("Ingrese la longitud del arreglo para medir tiempo: ");
-                    int length = scanner.nextInt();
-                    Integer[] array = generarArrayAleatorio(length);
+                    System.out.print("Ingrese el tamaño del arreglo para medir tiempo: ");
+                    int len = in.nextInt();
+                    Integer[] arr = generarArrayAleatorio(len);
 
                     System.out.print("Seleccione el tipo de ordenamiento (insercion, shell, quick): ");
-                    String tipoOrdenamiento = scanner.next();
+                    String tipoOrdenamiento = in.next();
 
-                    long tiempo = medirTiempoOrdenamiento(array.clone(), tipoOrdenamiento);
+                    long tiempo = medirTiempoOrdenamiento(arr.clone(), tipoOrdenamiento);
                     System.out.printf("Tiempo de ordenamiento para %d elementos usando %s: %d ns%n",
-                            length, tipoOrdenamiento, tiempo);
+                            len, tipoOrdenamiento, tiempo);
                 }
-                case 0 -> System.out.println("Volviendo al menú principal...");
-                default -> System.out.println("Opción no válida.");
+                case 0 -> System.out.println("Volviendo al menu...");
+                default -> System.out.println("Opción no valida.");
             }
-        } while (opcion != 0);
+        } while (opc != 0);
     }
 }
 
