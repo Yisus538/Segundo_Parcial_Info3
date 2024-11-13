@@ -8,14 +8,14 @@ public class PracticoColaPila {
     // Verificar si una cadena es un palíndromo usando una pila
     public static boolean esPalindromo(String cadena) {
         cadena = cadena.replaceAll("\\s+", "").toLowerCase();
-        PilaArreglo<Character> pila = new PilaArreglo<>(); // Crear instancia de Pila
+        PilaArreglo<Character> pila = new PilaArreglo<>();
 
-        int longitud = cadena.length();
-        for (int i = 0; i < longitud / 2; i++) {
+        int len = cadena.length();
+        for (int i = 0; i < len / 2; i++) {
             pila.push(cadena.charAt(i));
         }
 
-        for (int i = (longitud + 1) / 2; i < longitud; i++) {
+        for (int i = (len + 1) / 2; i < len; i++) {
             if (pila.pop() != cadena.charAt(i)) {
                 return false;
             }
@@ -24,7 +24,7 @@ public class PracticoColaPila {
     }
     // Verificar si una expresión matemática tiene paréntesis equilibrados
     public static boolean expresionEquilibrada(String expresion) {
-        PilaArreglo<Character> pila = new PilaArreglo<>(); // Crear instancia de Pila
+        PilaArreglo<Character> pila = new PilaArreglo<>();
 
         for (char c : expresion.toCharArray()) {
             if (c == '(') {
@@ -75,47 +75,45 @@ public class PracticoColaPila {
     }
     // Método para mostrar el menú y ejecutar las opciones del práctico 3
     public static void mostrarMenu() {
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
+        Scanner in = new Scanner(System.in);
+        int opc;
 
         do {
-            System.out.println("\nSeleccione una opción del Práctico 3 - Pila & Cola:");
-            System.out.println("1. Verificar Palíndromo");
+            System.out.println("\nPractico 3 - Pila & Cola:");
+            System.out.println("1. Verificar Palindromo");
             System.out.println("2. Verificar Expresión Equilibrada");
             System.out.println("3. Ordenar Cola Ascendentemente");
             System.out.println("0. Volver al menú principal");
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            opc = in.nextInt();
+            in.nextLine();
 
-            switch (opcion) {
+            switch (opc) {
                 case 1 -> {
-                    System.out.print("Ingrese una cadena para verificar si es palíndromo: ");
-                    String cadena = scanner.nextLine();
-                    boolean esPalindromo = esPalindromo(cadena);
-                    System.out.println("La cadena es " + (esPalindromo ? "" : "no ") + "un palíndromo.");
+                    System.out.print("Ingrese una cadena para verificar si es palindromo: ");
+                    String cadena = in.nextLine();
+                    System.out.println("La cadena es " + (esPalindromo(cadena) ? "" : "no ") + "un palindromo.");
                 }
                 case 2 -> {
-                    System.out.print("Ingrese una expresión matemática para verificar si está equilibrada: ");
-                    String expresion = scanner.nextLine();
-                    boolean equilibrada = expresionEquilibrada(expresion);
-                    System.out.println("La expresión está " + (equilibrada ? "" : "no ") + "equilibrada.");
+                    System.out.print("Ingrese una expresion matematica para verificar si está equilibrada: ");
+                    String expresion = in.nextLine();
+                    System.out.println("La expresion está " + (expresionEquilibrada(expresion) ? "" : "no ") + "equilibrada.");
                 }
                 case 3 -> {
                     System.out.print("Ingrese la cantidad de elementos en la cola: ");
-                    int cantidad = scanner.nextInt();
-                    ColaArreglo<Integer> cola = new ColaArreglo<>(); // Crear instancia de Cola
+                    int cantidad = in.nextInt();
+                    ColaArreglo<Integer> cola = new ColaArreglo<>();
 
                     System.out.println("Ingrese los elementos de la cola:");
                     for (int i = 0; i < cantidad; i++) {
-                        cola.enqueue(scanner.nextInt());
+                        cola.enqueue(in.nextInt());
                     }
 
                     ordenarColaAscendente(cola);
                 }
-                case 0 -> System.out.println("Volviendo al menú principal...");
-                default -> System.out.println("Opción no válida. Intente de nuevo.");
+                case 0 -> System.out.println("Volviendo al menu...");
+                default -> System.out.println("Opcion no valida.....");
             }
-        } while (opcion != 0);
-        scanner.close();
+        } while (opc != 0);
+        in.close();
     }
 }
