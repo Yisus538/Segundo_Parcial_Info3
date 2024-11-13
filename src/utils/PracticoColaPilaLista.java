@@ -8,11 +8,11 @@ public class PracticoColaPilaLista {
     // Ejercicio 1: Pila de palabras
     public static void pilaDePalabras() {
         PilaLista<String> pila = new PilaLista<>();
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         System.out.println("Ingrese palabras (escriba 'fin' para terminar):");
 
         while (true) {
-            String palabra = scanner.nextLine();
+            String palabra = in.nextLine();
             if (palabra.equalsIgnoreCase("fin")) break;
             pila.push(palabra);
         }
@@ -56,11 +56,11 @@ public class PracticoColaPilaLista {
     // Ejercicio 4: Suma de números en una Cola
     public static int sumaCola() {
         ColaLista<Integer> cola = new ColaLista<>();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese números para encolar (escriba 'fin' para terminar):");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Ingrese numeros para encolar (escriba 'fin' para terminar):");
 
-        while (scanner.hasNext()) {
-            String entrada = scanner.next();
+        while (in.hasNext()) {
+            String entrada = in.next();
             if (entrada.equalsIgnoreCase("fin")) {
                 break;
             }
@@ -68,7 +68,7 @@ public class PracticoColaPilaLista {
                 int numero = Integer.parseInt(entrada);
                 cola.enqueue(numero);
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Ingrese un número o 'fin' para terminar.");
+                System.out.println("Entrada inválida. Ingrese un numero o 'fin' para terminar.");
             }
         }
 
@@ -128,38 +128,35 @@ public class PracticoColaPilaLista {
     }
 
     public static void mostrarMenu() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\nSeleccione una opción del Práctico 4 - Pila & Cola con Lista:");
+            System.out.println("\nPractico 4 - Pila & Cola con Lista:");
             System.out.println("1. Pila de Palabras");
-            System.out.println("2. Verificar Paréntesis Balanceados");
+            System.out.println("2. Verificar Parentesis Balanceados");
             System.out.println("3. Convertir Decimal a Binario");
-            System.out.println("4. Suma de Números en Cola");
+            System.out.println("4. Suma de Numeros en Cola");
             System.out.println("5. Ordenar Cola Ascendentemente(Comentado)");
             System.out.println("6. Verificar Palíndromo");
             System.out.println("0. Salir");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            int opc = in.nextInt();
+            in.nextLine();
 
-            switch (opcion) {
+            switch (opc) {
                 case 1 -> pilaDePalabras();
                 case 2 -> {
-                    System.out.print("Ingrese una expresión matemática: ");
-                    String expresion = scanner.nextLine();
-                    boolean balanceada = verificarParentesis(expresion);
-                    System.out.println("La expresión está " + (balanceada ? "balanceada." : "desbalanceada."));
+                    System.out.print("Ingrese una expresioin matematica: ");
+                    String expresion = in.nextLine();
+                    System.out.println("La expresion esta " + (verificarParentesis(expresion) ? "balanceada." : "desbalanceada."));
                 }
                 case 3 -> {
-                    System.out.print("Ingrese un número decimal para convertir a binario: ");
-                    int numero = scanner.nextInt();
-                    System.out.println("Representación en binario: " + convertirDecimalABinario(numero));
+                    System.out.print("Ingrese un numero decimal para convertir a binario: ");
+                    System.out.println("Representacion en binario: " + convertirDecimalABinario(in.nextInt()));
                 }
                 case 4 -> {
-                    int suma = sumaCola();
-                    System.out.println("La suma de los números en la cola es: " + suma);
+                    System.out.println("La suma de los numeros en la cola es: " + sumaCola());
                 }
                 /*case 5 -> {
                     ColaLista<Integer> cola = new ColaLista<>();
@@ -184,19 +181,18 @@ public class PracticoColaPilaLista {
                     System.out.println();
                 }*/
                 case 6 -> {
-                    System.out.print("Ingrese una palabra o frase para verificar si es palíndromo: ");
-                    String cadena = scanner.nextLine();
-                    boolean esPalindromo = esPalindromo(cadena);
-                    System.out.println("La frase es " + (esPalindromo ? "" : "no ") + "un palíndromo.");
+                    System.out.print("Ingrese una palabra o frase para verificar si es palidromo: ");
+                    String cadena = in.nextLine();
+                    System.out.println("La frase es " + (esPalindromo(cadena) ? "" : "no ") + "un palindromo.");
                 }
                 case 0 -> {
                     salir = true;
                     System.out.println("Saliendo del programa.");
                 }
-                default -> System.out.println("Opción no válida. Intente de nuevo.");
+                default -> System.out.println("Opcion no valida. Intente de nuevo.");
             }
         }
-        scanner.close();
+        in.close();
     }
 
 }
