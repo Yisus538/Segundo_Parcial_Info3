@@ -12,11 +12,11 @@ public class Segundo_Parcial {
             System.out.println("---- MENU ----");
             System.out.println("1. Recursividad"); // DONE
             System.out.println("2. Ordenamiento"); // DONE
-            System.out.println("3. Pila & Cola con Arreglo");
-            System.out.println("4. Pila & Cola con Lista");
-            System.out.println("5. Arbol Binario");
-            System.out.println("6. Arbol Rojo & Negro");
-            System.out.println("7. Monticulo & Tabla Hash");
+            System.out.println("3. Pila & Cola con Arreglo"); // DONE
+            System.out.println("4. Pila & Cola con Lista"); // DONE
+            System.out.println("5. Arbol Binario");// DONE
+            System.out.println("6. Arbol Rojo & Negro"); // DONE
+            System.out.println("7. Monticulo & Tabla Hash"); // DONE
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
             opc = in.nextInt();
