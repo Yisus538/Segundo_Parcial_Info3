@@ -38,7 +38,6 @@ public class ArbolBinario implements IArbol {
         inorderRecursivo(raiz);
         System.out.println();
     }
-
     private void inorderRecursivo(Nodo nodo) {
         if (nodo != null) {
             inorderRecursivo(nodo.izquierdo);
@@ -92,9 +91,10 @@ public class ArbolBinario implements IArbol {
         }
         return minValor;
     }
+
     public void imprimirArbol() {
         if (raiz == null) {
-            System.out.println("El árbol está vacío.");
+            System.out.println("El arbol está vacio.");
             return;
         }
 

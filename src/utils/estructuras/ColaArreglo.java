@@ -3,6 +3,7 @@ package utils.estructuras;
 import java.util.NoSuchElementException;
 
 public class ColaArreglo<T> implements Cola<T> {
+
     private static final int CAPACIDAD_INICIAL = 10;
     private T[] elementos;
     private int frente, fin, tamanio;

@@ -15,7 +15,7 @@ public class PracticoArbolRojoyNegro {
             System.out.println("\n--- PRACTICO 8 - ARBOL ROJINEGRO ---");
             System.out.println("1. Insertar un valor");
             System.out.println("2. Insertar valores predefinidos");
-            System.out.println("3. Visualizar el árbol");
+            System.out.println("3. Visualizar el arbol");
             System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
 

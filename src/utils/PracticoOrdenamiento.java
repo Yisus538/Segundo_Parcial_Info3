@@ -72,7 +72,7 @@ public class PracticoOrdenamiento {
         Random random = new Random();
         Integer[] array = new Integer[length];
         for (int i = 0; i < length; i++) {
-            array[i] = random.nextInt(1000); // valores entre 0 y 999
+            array[i] = random.nextInt(1000);
         }
         return array;
     }

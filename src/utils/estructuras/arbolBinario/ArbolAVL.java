@@ -1,164 +1,111 @@
 package utils.estructuras.arbolBinario;
 
-import java.util.Random;
-
-public class ArbolAVL implements IArbol {
-
+public class ArbolAVL {
     private Nodo raiz;
 
-    // Método para obtener la altura de un nodo
+    // Obtener la altura de un nodo
     private int altura(Nodo nodo) {
         return (nodo == null) ? 0 : nodo.altura;
     }
-    // Factor de balanceo de un nodo
-    private int factorBalance(Nodo nodo) {
+
+    // Actualizar altura de un nodo
+    private void actualizarAltura(Nodo nodo) {
+        nodo.altura = 1 + Math.max(altura(nodo.izquierdo), altura(nodo.derecho));
+    }
+
+    // Obtener factor de equilibrio
+    private int obtenerFactorEquilibrio(Nodo nodo) {
         return (nodo == null) ? 0 : altura(nodo.izquierdo) - altura(nodo.derecho);
     }
+
     // Rotación a la derecha
-    private Nodo rotarDerecha(Nodo y) {
+    private Nodo rotacionDerecha(Nodo y) {
         Nodo x = y.izquierdo;
         Nodo T2 = x.derecho;
 
-        // Rotación
         x.derecho = y;
         y.izquierdo = T2;
 
-        // Actualizar alturas
-        y.altura = Math.max(altura(y.izquierdo), altura(y.derecho)) + 1;
-        x.altura = Math.max(altura(x.izquierdo), altura(x.derecho)) + 1;
+        actualizarAltura(y);
+        actualizarAltura(x);
 
-        // Nueva raíz
         return x;
     }
+
     // Rotación a la izquierda
-    private Nodo rotarIzquierda(Nodo x) {
+    private Nodo rotacionIzquierda(Nodo x) {
         Nodo y = x.derecho;
         Nodo T2 = y.izquierdo;
 
-        // Rotación
         y.izquierdo = x;
         x.derecho = T2;
 
-        // Actualizar alturas
-        x.altura = Math.max(altura(x.izquierdo), altura(x.derecho)) + 1;
-        y.altura = Math.max(altura(y.izquierdo), altura(y.derecho)) + 1;
+        actualizarAltura(x);
+        actualizarAltura(y);
 
-        // Nueva raíz
         return y;
     }
-    // Método de inserción con balanceo
-    @Override
-    public void insertar(int valor) {
-        raiz = insertarRecursivo(raiz, valor);
+
+    // Rotación doble a la derecha
+    private Nodo rotacionDobleDerecha(Nodo nodo) {
+        nodo.izquierdo = rotacionIzquierda(nodo.izquierdo);
+        return rotacionDerecha(nodo);
     }
-    private Nodo insertarRecursivo(Nodo nodo, int valor) {
-        if (nodo == null) {
-            return new Nodo(valor);
-        }
+
+    // Rotación doble a la izquierda
+    private Nodo rotacionDobleIzquierda(Nodo nodo) {
+        nodo.derecho = rotacionDerecha(nodo.derecho);
+        return rotacionIzquierda(nodo);
+    }
+
+    // Inserción de un valor en el árbol AVL
+    public Nodo insertar(Nodo nodo, int valor) {
+        if (nodo == null) return new Nodo(valor);
 
         if (valor < nodo.valor) {
-            nodo.izquierdo = insertarRecursivo(nodo.izquierdo, valor);
+            nodo.izquierdo = insertar(nodo.izquierdo, valor);
         } else if (valor > nodo.valor) {
-            nodo.derecho = insertarRecursivo(nodo.derecho, valor);
+            nodo.derecho = insertar(nodo.derecho, valor);
         } else {
             return nodo; // No se permiten valores duplicados
         }
 
-        // Actualizar altura del nodo actual
-        nodo.altura = 1 + Math.max(altura(nodo.izquierdo), altura(nodo.derecho));
+        actualizarAltura(nodo);
+        int balance = obtenerFactorEquilibrio(nodo);
 
-        // Balancear el nodo
-        return balancear(nodo);
+        // Aplicación de las rotaciones en caso de desbalance
+        if (balance > 1 && valor < nodo.izquierdo.valor) {
+            return rotacionDerecha(nodo);
+        }
+        if (balance < -1 && valor > nodo.derecho.valor) {
+            return rotacionIzquierda(nodo);
+        }
+        if (balance > 1 && valor > nodo.izquierdo.valor) {
+            return rotacionDobleDerecha(nodo);
+        }
+        if (balance < -1 && valor < nodo.derecho.valor) {
+            return rotacionDobleIzquierda(nodo);
+        }
+
+        return nodo;
     }
-    // Método para balancear el árbol en caso de desbalance
-    private Nodo balancear(Nodo nodo) {
-        int balance = factorBalance(nodo);
 
-        // Rotación hacia la derecha (desbalance en la izquierda)
-        if (balance > 1 && factorBalance(nodo.izquierdo) >= 0) {
-            return rotarDerecha(nodo);
-        }
-
-        // Rotación hacia la izquierda-derecha (desbalance en la izquierda-derecha)
-        if (balance > 1 && factorBalance(nodo.izquierdo) < 0) {
-            nodo.izquierdo = rotarIzquierda(nodo.izquierdo);
-            return rotarDerecha(nodo);
-        }
-
-        // Rotación hacia la izquierda (desbalance en la derecha)
-        if (balance < -1 && factorBalance(nodo.derecho) <= 0) {
-            return rotarIzquierda(nodo);
-        }
-
-        // Rotación hacia la derecha-izquierda (desbalance en la derecha-izquierda)
-        if (balance < -1 && factorBalance(nodo.derecho) > 0) {
-            nodo.derecho = rotarDerecha(nodo.derecho);
-            return rotarIzquierda(nodo);
-        }
-
-        return nodo; // No necesita balanceo
+    // Método público para insertar
+    public void insertar(int valor) {
+        raiz = insertar(raiz, valor);
     }
-    // Método para eliminar un nodo con balanceo
-    @Override
-    public void eliminar(int valor) {
-        raiz = eliminarRecursivo(raiz, valor);
-    }
-    // Método para generar un árbol AVL con valores aleatorios
-    @Override
-    public void generarArbol() {
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            int valor = random.nextInt(26); // Genera valores entre 0 y 25
-            insertar(valor);
-        }
-        System.out.println("Árbol AVL generado con valores aleatorios.");
-    }
-    private Nodo eliminarRecursivo(Nodo nodo, int valor) {
-        if (nodo == null) {
-            return null;
-        }
 
-        if (valor < nodo.valor) {
-            nodo.izquierdo = eliminarRecursivo(nodo.izquierdo, valor);
-        } else if (valor > nodo.valor) {
-            nodo.derecho = eliminarRecursivo(nodo.derecho, valor);
-        } else {
-            if ((nodo.izquierdo == null) || (nodo.derecho == null)) {
-                nodo = (nodo.izquierdo != null) ? nodo.izquierdo : nodo.derecho;
-            } else {
-                Nodo temp = encontrarMin(nodo.derecho);
-                nodo.valor = temp.valor;
-                nodo.derecho = eliminarRecursivo(nodo.derecho, temp.valor);
-            }
+    // Mostrar árbol en InOrden
+    public void mostrarInOrden(Nodo nodo) {
+        if (nodo != null) {
+            mostrarInOrden(nodo.izquierdo);
+            System.out.print(nodo.valor + " ");
+            mostrarInOrden(nodo.derecho);
         }
-
-        if (nodo == null) return nodo;
-
-        nodo.altura = Math.max(altura(nodo.izquierdo), altura(nodo.derecho)) + 1;
-        return balancear(nodo);
     }
-    private Nodo encontrarMin(Nodo nodo) {
-        Nodo actual = nodo;
-        while (actual.izquierdo != null) {
-            actual = actual.izquierdo;
-        }
-        return actual;
-    }
-    @Override
-    public void inorder() {
-        inorderRecursivo(raiz);
+
+    public void mostrarInOrden() {
+        mostrarInOrden(raiz);
         System.out.println();
     }
-    private void inorderRecursivo(Nodo nodo) {
-        if (nodo != null) {
-            inorderRecursivo(nodo.izquierdo);
-            System.out.print(nodo.valor + " ");
-            inorderRecursivo(nodo.derecho);
-        }
-    }
-    @Override
-    public int profundidad() {
-        return altura(raiz);
-    }
 }
-
