@@ -6,5 +6,4 @@ public interface IArbol {
     int profundidad();
     void eliminar(int valor);
     void generarArbol();
-
 }

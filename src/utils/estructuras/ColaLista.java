@@ -3,6 +3,7 @@ package utils.estructuras;
 import java.util.NoSuchElementException;
 
 public class ColaLista<T> implements Cola<T> {
+
     private Nodo<T> frente;
     private Nodo<T> fin;
     private int tam;
@@ -17,7 +18,6 @@ public class ColaLista<T> implements Cola<T> {
             this.siguiente = null;
         }
     }
-
     // Implementación de métodos de la interfaz Cola
     @Override
     public void enqueue(T elemento) {
@@ -30,7 +30,6 @@ public class ColaLista<T> implements Cola<T> {
         }
         tam++;
     }
-
     @Override
     public T dequeue() {
         if (isEmpty()) {
@@ -44,7 +43,6 @@ public class ColaLista<T> implements Cola<T> {
         tam--;
         return dato;
     }
-
     @Override
     public T top() {
         if (isEmpty()) {
@@ -52,7 +50,6 @@ public class ColaLista<T> implements Cola<T> {
         }
         return frente.dato;
     }
-
     @Override
     public boolean isEmpty() {
         return frente == null;

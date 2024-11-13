@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import utils.*;
-import utils.PracticoArbolRojoyNegro;
 
 public class Segundo_Parcial {
     public static void main(String[] args) {
@@ -10,13 +9,13 @@ public class Segundo_Parcial {
 
         do {
             System.out.println("---- MENU ----");
-            System.out.println("1. Recursividad"); // DONE
-            System.out.println("2. Ordenamiento"); // DONE
-            System.out.println("3. Pila & Cola con Arreglo"); // DONE
-            System.out.println("4. Pila & Cola con Lista"); // DONE
-            System.out.println("5. Arbol Binario");// DONE
-            System.out.println("6. Arbol Rojo & Negro"); // DONE
-            System.out.println("7. Monticulo & Tabla Hash"); // DONE
+            System.out.println("1. Recursividad"); // DONE -> Lean
+            System.out.println("2. Ordenamiento"); // DONE -> Lean y Jesus
+            System.out.println("3. Pila & Cola con Arreglo"); // DONE -> Lean
+            System.out.println("4. Pila & Cola con Lista"); // DONE -> Jesus
+            System.out.println("5. Arbol Binario");// DONE -> Jesus
+            System.out.println("6. Arbol Rojo & Negro"); // DONE -> Vale y Gringo
+            System.out.println("7. Monticulo & Tabla Hash"); // DONE -> Vale y Gringo
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
             opc = in.nextInt();
